@@ -1,44 +1,90 @@
-# Algoritmos y Estructuras de Datos
+# Algorithms & Data Structures
 
-Colección de implementaciones desarrolladas en el curso de Algoritmos y Estructura de Datos (Ingeniería en Sistemas Computacionales, UNAH). Incluye estructuras de datos avanzadas construidas desde cero en Python, sin librerías externas.
+A collection of implementations built for the Algorithms and Data Structures course (Systems Engineering, UNAH). Includes advanced data structures written from scratch in Python, with no external libraries.
 
-## Estructuras de datos
+## Data structures
 
-### `estructuras_de_datos/log_map/` — Árbol AVL (mapa ordenado autobalanceado)
-Implementación completa de un árbol AVL (`AVLTreeMap`) con rotaciones simples y dobles, rebalanceo automático, y operaciones de mapa ordenado (`find_le`, `find_lt`, `find_ge`, `find_gt`, `find_range`).
+### `estructuras_de_datos/log_map/` — AVL tree (self-balancing ordered map)
+A complete AVL tree implementation (`AVLTreeMap`) with single and double rotations, automatic rebalancing, and ordered-map operations (`find_le`, `find_lt`, `find_ge`, `find_gt`, `find_range`).
 
-Sobre esa base se construyó `LogMap`: una estructura especializada para indexar y consultar entradas de log por fecha (`datetime`), con validación de tipos en cada operación.
+Built on top of it, `LogMap` is a specialized structure for indexing and querying log entries by date (`datetime`), with type validation on every operation.
 
-**Complejidad:** O(log n) garantizado en inserción, búsqueda y eliminación, gracias al balanceo AVL.
+**Complexity:** O(log n) guaranteed for insertion, search, and deletion, thanks to AVL balancing.
 
-### `estructuras_de_datos/treque.py` — Deque con inserción/eliminación al medio
-Estructura de datos tipo "treque": una cola de tres extremos (inicio, final y medio), implementada con lista doblemente enlazada.
+```python
+from datetime import datetime
+from estructuras_de_datos.log_map.log_map import LogMap
 
-- Operaciones en los extremos (`insert_first`, `insert_last`, `delete_first`, `delete_last`): **O(1)**
-- Operaciones al medio (`insert_middle`, `delete_middle`): **O(n)**
-- Manejo de excepciones propio (`Empty`) para operaciones sobre estructura vacía.
+m = LogMap()
+m[datetime(2026, 1, 5)] = "login failed"
+m[datetime(2026, 1, 9)] = "disk warning"
+m[datetime(2026, 1, 12)] = "server restart"
 
-## Algoritmos
-
-### `algoritmos/funciones.py`
-- **`nro_de_salas`** — Determina el número mínimo de salas necesarias para agendar un conjunto de reuniones sin solapamiento, usando un enfoque de línea de barrido (*sweep line*) sobre eventos de inicio/fin.
-- **`vuelto`** — Algoritmo greedy de cambio de moneda, adaptado a denominaciones de Lempiras hondureñas.
-- **`invierte_palabras`**, **`dibuja_rectangulo`** — Ejercicios de manipulación de cadenas.
-
-## Ejercicios
-
-Ejercicios menores de control de flujo, manejo de excepciones y funciones (`ejercicios/`), usados para practicar validación de entradas, manejo de errores y estructuras iterativas básicas.
-
-## Cómo ejecutar
-
-Todos los scripts son Python estándar (3.x), sin dependencias externas:
-
-```bash
-python estructuras_de_datos/treque.py
-python estructuras_de_datos/log_map/log_map.py
-python algoritmos/funciones.py
+for k, v in m.find_range(datetime(2026, 1, 6), datetime(2026, 1, 13)):
+    print(k.date(), "->", v)
+```
+```
+2026-01-09 -> disk warning
+2026-01-12 -> server restart
 ```
 
-## Contexto académico
+### `estructuras_de_datos/treque.py` — deque with middle insertion/deletion
+A "treque" — a three-ended queue (front, back, and middle) — implemented with a doubly linked list.
 
-Desarrollado como parte del curso de Algoritmos y Estructura de Datos de la carrera de Ingeniería en Sistemas Computacionales, Universidad Nacional Autónoma de Honduras (UNAH).
+- Operations at the ends (`insert_first`, `insert_last`, `delete_first`, `delete_last`): **O(1)**
+- Operations in the middle (`insert_middle`, `delete_middle`): **O(n)**
+- Custom exception handling (`Empty`) for operations on an empty structure.
+
+```python
+from estructuras_de_datos.treque import LinkedTreque
+
+t = LinkedTreque()
+t.insert_last(1)
+t.insert_last(2)
+t.insert_first(0)
+t.insert_middle(99)
+
+print(list(t.items()))
+```
+```
+[0, 99, 1, 2]
+```
+
+## Algorithms
+
+### `algoritmos/funciones.py`
+- **`nro_de_salas`** — Determines the minimum number of rooms needed to schedule a set of meetings without overlap, using a sweep-line approach over start/end events.
+- **`vuelto`** — Greedy currency-exchange algorithm, adapted to Honduran Lempira denominations.
+- **`invierte_palabras`**, **`dibuja_rectangulo`** — String manipulation exercises.
+
+```python
+from algoritmos.funciones import vuelto, nro_de_salas
+
+print(vuelto(87.50, 100))
+print(nro_de_salas([(0, 30), (5, 10), (15, 20)]))
+```
+```
+{10.0: 1, 2.0: 1, 0.5: 1}
+2
+```
+
+## Exercises
+
+Smaller exercises in control flow, exception handling, and functions (`ejercicios/`), used to practice input validation, error handling, and basic iterative structures.
+
+## Running this
+
+These are library modules (no `__main__` entry points), meant to be imported rather than run directly. Use them from a Python shell or script, as in the examples above — all standard Python (3.x), no external dependencies:
+
+```bash
+python -c "
+from estructuras_de_datos.treque import LinkedTreque
+t = LinkedTreque()
+t.insert_last(1)
+print(list(t.items()))
+"
+```
+
+## Academic context
+
+Developed as part of the Algorithms and Data Structures course, Systems Engineering program, Universidad Nacional Autónoma de Honduras (UNAH).
