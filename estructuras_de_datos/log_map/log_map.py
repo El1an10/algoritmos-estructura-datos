@@ -164,6 +164,9 @@ class AVLTreeMap:
             self._transplant(node, node.left)
         else:
             y = self._subtree_min(node.right)
+            # Rebalancear desde el padre original del sucesor: es el nodo mas
+            # profundo cuya altura cambia al quitar y de su posicion.
+            rebalance_start = y if y.parent is node else y.parent
             if y.parent is not node:
                 self._transplant(y, y.right)
                 y.right = node.right
@@ -171,7 +174,6 @@ class AVLTreeMap:
             self._transplant(node, y)
             y.left = node.left
             y.left.parent = y
-            rebalance_start = y
 
         self._size -= 1
         if rebalance_start is not None:

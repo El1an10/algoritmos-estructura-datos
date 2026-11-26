@@ -1,10 +1,12 @@
 # Algorithms & Data Structures
 
+[![tests](https://github.com/El1an10/algoritmos-estructura-datos/actions/workflows/tests.yml/badge.svg)](https://github.com/El1an10/algoritmos-estructura-datos/actions/workflows/tests.yml)
+
 A collection of implementations built for the Algorithms and Data Structures course (Systems Engineering, UNAH). Includes advanced data structures written from scratch in Python, with no external libraries.
 
 ## Data structures
 
-### `estructuras_de_datos/log_map/` — AVL tree (self-balancing ordered map)
+### `estructuras_de_datos/log_map/`: AVL tree (self-balancing ordered map)
 A complete AVL tree implementation (`AVLTreeMap`) with single and double rotations, automatic rebalancing, and ordered-map operations (`find_le`, `find_lt`, `find_ge`, `find_gt`, `find_range`).
 
 Built on top of it, `LogMap` is a specialized structure for indexing and querying log entries by date (`datetime`), with type validation on every operation.
@@ -28,8 +30,8 @@ for k, v in m.find_range(datetime(2026, 1, 6), datetime(2026, 1, 13)):
 2026-01-12 -> server restart
 ```
 
-### `estructuras_de_datos/treque.py` — deque with middle insertion/deletion
-A "treque" — a three-ended queue (front, back, and middle) — implemented with a doubly linked list.
+### `estructuras_de_datos/treque.py`: deque with middle insertion/deletion
+A "treque" (a three-ended queue: front, back, and middle) implemented with a doubly linked list.
 
 - Operations at the ends (`insert_first`, `insert_last`, `delete_first`, `delete_last`): **O(1)**
 - Operations in the middle (`insert_middle`, `delete_middle`): **O(n)**
@@ -53,9 +55,9 @@ print(list(t.items()))
 ## Algorithms
 
 ### `algoritmos/funciones.py`
-- **`nro_de_salas`** — Determines the minimum number of rooms needed to schedule a set of meetings without overlap, using a sweep-line approach over start/end events.
-- **`vuelto`** — Greedy currency-exchange algorithm, adapted to Honduran Lempira denominations.
-- **`invierte_palabras`**, **`dibuja_rectangulo`** — String manipulation exercises.
+- **`nro_de_salas`**: determines the minimum number of rooms needed to schedule a set of meetings without overlap, using a sweep-line approach over start/end events.
+- **`vuelto`**: greedy change-making algorithm using Honduran Lempira bills and coins.
+- **`invierte_palabras`**, **`dibuja_rectangulo`**: string manipulation exercises.
 
 ```python
 from algoritmos.funciones import vuelto, nro_de_salas
@@ -74,7 +76,7 @@ Smaller exercises in control flow, exception handling, and functions (`ejercicio
 
 ## Running this
 
-These are library modules (no `__main__` entry points), meant to be imported rather than run directly. Use them from a Python shell or script, as in the examples above — all standard Python (3.x), no external dependencies:
+These are library modules (no `__main__` entry points), meant to be imported rather than run directly. Use them from a Python shell or script, as in the examples above. All standard Python (3.x), no external dependencies:
 
 ```bash
 python -c "
@@ -85,6 +87,19 @@ print(list(t.items()))
 "
 ```
 
+## Tests
+
+The repository includes a `pytest` suite in `tests/` that covers the AVL tree (including randomized checks that the tree stays balanced after every insert and delete), the treque, and the algorithms. It runs automatically on every push and pull request through GitHub Actions.
+
+```bash
+pip install pytest
+pytest -q
+```
+
 ## Academic context
 
 Developed as part of the Algorithms and Data Structures course, Systems Engineering program, Universidad Nacional Autónoma de Honduras (UNAH).
+
+## License
+
+MIT. See [LICENSE](LICENSE).

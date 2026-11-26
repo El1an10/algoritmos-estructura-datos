@@ -13,29 +13,30 @@ def calcular_promedio(calificaciones):
         promedio = total / len(calificaciones)
         return promedio
     except TypeError as e:
-        print(f'Error en las califficaciones: {e}')
+        print(f'Error en las calificaciones: {e}')
         return None
     
 # Ejemplos de uso
-print("--- CALCULADORA DE PROMEDIOS ===")
+print("=== CALCULADORA DE PROMEDIOS ===")
 
 # Caso exitoso
 calificaciones_validas = [85, 90, 78, 92, 88]
 promedio = calcular_promedio(calificaciones_validas)
-if promedio:
+if promedio is not None:
     print(f"Promedio: {promedio:.2f}")
 
 # Caso con error - contiene texto
 calificaciones_invalidas = [85, 90, 'ausente', 92, 88]
 promedio = calcular_promedio(calificaciones_invalidas)
-if promedio:
-    print("Promedio: {promedio:.2f}")
+if promedio is not None:
+    print(f"Promedio: {promedio:.2f}")
 else:
     print("No se pudo calcular el promedio")
 
 #Caso con error - contiene valor None
 calificaciones_con_none = [85, 90, None, 92, 88]
 promedio = calcular_promedio(calificaciones_con_none)
-
-
-
+if promedio is not None:
+    print(f"Promedio: {promedio:.2f}")
+else:
+    print("No se pudo calcular el promedio")
