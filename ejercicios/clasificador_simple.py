@@ -24,4 +24,4 @@ while True:
         resultado = classification_n(numero)
         print(f"El numero {numero} es: {resultado}")
     except ValueError:
-        print("Entrada invalida. Po favor ingrese un numero entrero o 'salir")
+        print("Entrada invalida. Por favor ingrese un numero entero o 'salir'")

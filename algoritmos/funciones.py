@@ -84,7 +84,7 @@ def nro_de_salas(reuniones):
 
 
 def vuelto(cantidad_pagar, cantidad_entregada):
-    """Retorna un diccionario con la cantidad de billetes y monedas que deben ser entregas como
+    """Retorna un diccionario con la cantidad de billetes y monedas que deben ser entregados como
     vuelto a un cliente."""
     
     # Calcular cuanto vuelto hay que dar
@@ -96,9 +96,9 @@ def vuelto(cantidad_pagar, cantidad_entregada):
     if vuelto_centavos <= 0:
         return {}
     
-    # Denominaciones en centavos (de mayor a menor)
-    denoms_centavos = [50000, 20000, 10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 25, 10, 5, 2, 1]
-    denoms_lempiras = [500.0, 200.0, 100.0, 50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.5, 0.2, 0.25, 0.10, 0.05, 0.02, 0.01]
+    # Denominaciones de Lempira en centavos (de mayor a menor)
+    denoms_centavos = [50000, 20000, 10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1]
+    denoms_lempiras = [500.0, 200.0, 100.0, 50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.5, 0.2, 0.10, 0.05, 0.02, 0.01]
     
     vuelto_dict = {}
     
